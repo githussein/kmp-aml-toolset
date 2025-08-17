@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class SearchViewModel(
-    private val repository: PersonRepository
+    private val personRepository: PersonRepository?
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(SearchUiState())
@@ -26,16 +26,16 @@ class SearchViewModel(
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
 
-            val persons = repository.getPersons()
+            val persons = personRepository?.getPersons()
             val results = if (_uiState.value.query.isBlank()) {
                 emptyList()
             } else {
-                persons.filter {
+                persons?.filter {
                     it.toString().contains(_uiState.value.query, ignoreCase = true)
                 }
             }
 
-            _uiState.update { it.copy(results = results, isLoading = false) }
+            _uiState.update { it.copy(results = results ?: emptyList(), isLoading = false) }
         }
     }
 }

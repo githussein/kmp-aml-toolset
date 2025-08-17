@@ -21,12 +21,11 @@ import com.example.amltoolset.theme.mintDark
 import com.example.amltoolset.theme.mintLight
 import com.example.amltoolset.theme.mintPrimary
 import org.jetbrains.compose.resources.painterResource
+import org.koin.compose.koinInject
 
 @Composable
-fun LoginScreen(
-    viewModel: LoginViewModel,
-    onLoginSuccess: () -> Unit
-) {
+fun LoginScreen(onLoginSuccess: () -> Unit) {
+    val viewModel: LoginViewModel = koinInject()
     val state by viewModel.state.collectAsState()
 
     LoginContent(

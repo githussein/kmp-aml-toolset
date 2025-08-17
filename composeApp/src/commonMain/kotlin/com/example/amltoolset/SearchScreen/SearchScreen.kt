@@ -18,10 +18,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.aml_kyc_tool.data.model.PersonDto
 import com.example.amltoolset.theme.mintDark
+import org.koin.compose.koinInject
 
 
 @Composable
-fun SearchScreen(viewModel: SearchViewModel) {
+fun SearchScreen() {
+    val viewModel: SearchViewModel = koinInject()
     val state by viewModel.uiState.collectAsState()
 
     val mintPrimary = Color(0xFF3EB489)
