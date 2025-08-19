@@ -1,5 +1,5 @@
 [versions]
-agp = "8.12.0"
+agp = "8.12.1"
 android-compileSdk = "35"
 android-minSdk = "24"
 android-targetSdk = "35"
@@ -16,7 +16,10 @@ koinCore = "4.1.0"
 kotlin = "2.2.0"
 kotlinx-coroutines = "1.10.2"
 kotlinxSerializationJson = "1.9.0"
+ktorClientXml = "2.3.7"
+ktorSerializationKotlinxXml = "3.2.3"
 navigationCompose = "2.8.0-alpha13"
+serialization = "0.91.2"
 
 [libraries]
 koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koinCore" }
@@ -33,7 +36,11 @@ androidx-lifecycle-viewmodelCompose = { module = "org.jetbrains.androidx.lifecyc
 androidx-lifecycle-runtimeCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
 kotlinx-coroutinesSwing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktorClientXml" }
+ktor-client-xml = { module = "io.ktor:ktor-client-xml", version.ref = "ktorClientXml" }
+ktor-serialization-kotlinx-xml = { module = "io.ktor:ktor-serialization-kotlinx-xml", version.ref = "ktorSerializationKotlinxXml" }
 navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
+serialization = { module = "io.github.pdvrieze.xmlutil:serialization", version.ref = "serialization" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

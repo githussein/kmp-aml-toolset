@@ -9,13 +9,13 @@ interface PersonRepository {
 
 class LocalJsonPersonRepository : PersonRepository {
     override suspend fun getPersons(): List<PersonDto> {
-        val dataList = kotlinx.serialization.json.Json.decodeFromString<DataListDto>(jsonString)
+        val dataList = kotlinx.serialization.json.Json.decodeFromString<DataListDto>(uaeLocalTerroristsList)
         return dataList.persons
     }
 
     companion object {
         // temporarily hardcoded until i setup a server
-        private val jsonString = """
+        private val uaeLocalTerroristsList = """
 {
   "list": "local uae",
   "persons": [

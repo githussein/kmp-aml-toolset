@@ -52,7 +52,7 @@ fun SearchScreen() {
         OutlinedTextField(
             value = state.query,
             onValueChange = { viewModel.onQueryChange(it) },
-            label = { Text("Search") },
+            label = { Text("Person or entity name") },
             modifier = Modifier.fillMaxWidth(),
         )
 
