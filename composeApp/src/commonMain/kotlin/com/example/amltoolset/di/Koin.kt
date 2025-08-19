@@ -16,7 +16,7 @@ val repositoryModule = module {
 
 
 val viewmodelModule = module {
-    factory { SearchViewModel(get(), get()) }
+    factory { SearchViewModel(get()) }
     factory { LoginViewModel() }
 }
 
