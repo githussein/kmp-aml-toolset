@@ -29,13 +29,27 @@ class SearchService(
     }
 
     suspend fun searchUNOnly(query: String): List<SearchResult> {
-        val individuals = unRepository.searchUNIndividuals(query)
-            .map { SearchResult.UNIndividualResult(it) }
+        val individuals = unRepository.getUNSanctions().INDIVIDUALS?.INDIVIDUAL ?: emptyList()
+        val entities = unRepository.getUNSanctions().ENTITIES?.ENTITY ?: emptyList()
 
-        val entities = unRepository.searchUNEntities(query)
-            .map { SearchResult.UNEntityResult(it) }
+        val filteredIndividuals = individuals.filter { individual ->
+            individual.FIRST_NAME?.contains(query, ignoreCase = true) == true ||
+                    individual.SECOND_NAME?.contains(query, ignoreCase = true) == true ||
+                    individual.REFERENCE_NUMBER?.contains(query, ignoreCase = true) == true ||
+                    individual.COMMENTS1?.contains(query, ignoreCase = true) == true ||
+                    individual.INDIVIDUAL_DOCUMENT.any {
+                        it.NUMBER?.contains(query, ignoreCase = true) == true
+                    }
+        }
 
-        return individuals + entities
+        val filteredEntities = entities.filter { entity ->
+            entity.FIRST_NAME?.contains(query, ignoreCase = true) == true ||
+                    entity.REFERENCE_NUMBER?.contains(query, ignoreCase = true) == true ||
+                    entity.COMMENTS1?.contains(query, ignoreCase = true) == true
+        }
+
+        return filteredIndividuals.map { SearchResult.UNIndividualResult(it) } +
+                filteredEntities.map { SearchResult.UNEntityResult(it) }
     }
 
     private fun List<PersonDto>.filterByQuery(query: String): List<PersonDto> {

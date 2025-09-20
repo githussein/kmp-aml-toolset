@@ -1,9 +1,11 @@
 package com.example.amltoolset.data
 
+import com.example.amltoolset.data.model.UNConsolidatedList
 import com.example.amltoolset.data.model.UNEntity
 import com.example.amltoolset.data.model.UNIndividual
 
 interface UNSanctionsRepository {
+    suspend fun getUNSanctions(): UNConsolidatedList
     suspend fun getUNIndividuals(): List<UNIndividual>
     suspend fun getUNEntities(): List<UNEntity>
     suspend fun searchUNIndividuals(query: String): List<UNIndividual>
@@ -13,6 +15,10 @@ interface UNSanctionsRepository {
 class UNSanctionsRepositoryImpl(
     private val unSanctionsService: UNSanctionsService
 ) : UNSanctionsRepository {
+
+    override suspend fun getUNSanctions(): UNConsolidatedList {
+        return unSanctionsService.getUNSanctionsList()
+    }
 
     override suspend fun getUNIndividuals(): List<UNIndividual> {
         return try {
@@ -36,7 +42,7 @@ class UNSanctionsRepositoryImpl(
         val individuals = getUNIndividuals()
         return if (query.isBlank()) emptyList() else {
             individuals.filter { individual ->
-                individual.FIRS_NAME?.contains(query, ignoreCase = true) == true ||
+                individual.FIRST_NAME?.contains(query, ignoreCase = true) == true ||
                         individual.SECOND_NAME?.contains(query, ignoreCase = true) == true ||
                         individual.REFERENCE_NUMBER?.contains(query, ignoreCase = true) == true ||
                         individual.NATIONALITY?.VALUE?.contains(query, ignoreCase = true) == true ||
