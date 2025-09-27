@@ -3,7 +3,7 @@ package com.example.amltoolset.di
 import com.example.aml_kyc_tool.SearchScreen.SearchViewModel
 import com.example.aml_kyc_tool.data.LocalJsonPersonRepository
 import com.example.aml_kyc_tool.data.PersonRepository
-import com.example.amltoolset.LoginScreen.LoginViewModel
+import com.example.amltoolset.ui.LoginScreen.LoginViewModel
 import com.example.amltoolset.data.SearchService
 import com.example.amltoolset.data.UNSanctionsRepository
 import com.example.amltoolset.data.UNSanctionsRepositoryImpl

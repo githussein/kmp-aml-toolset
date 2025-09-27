@@ -1,4 +1,4 @@
-package com.example.amltoolset.LoginScreen
+package com.example.amltoolset.ui.LoginScreen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

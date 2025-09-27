@@ -1,4 +1,4 @@
-package com.example.amltoolset.LoginScreen
+package com.example.amltoolset.ui.LoginScreen
 
 import amltoolset.composeapp.generated.resources.Res
 import amltoolset.composeapp.generated.resources.logo

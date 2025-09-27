@@ -7,7 +7,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.aml_kyc_tool.SearchScreen.SearchScreen
-import com.example.amltoolset.LoginScreen.LoginScreen
+import com.example.amltoolset.ui.LoginScreen.LoginScreen
 import com.example.amltoolset.di.initKoin
 
 @Composable
