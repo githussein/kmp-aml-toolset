@@ -4,11 +4,18 @@ import com.example.aml_kyc_tool.data.PersonRepository
 import com.example.aml_kyc_tool.data.model.PersonDto
 import com.example.amltoolset.data.model.SearchResult
 
-class SearchService(
+interface SearchService {
+    suspend fun searchAllSources(query: String): List<SearchResult>
+    suspend fun searchLocalOnly(query: String): List<SearchResult>
+    suspend fun searchUNOnly(query: String): List<SearchResult>
+}
+
+class SearchServiceImpl (
     private val localRepository: PersonRepository,
     private val unRepository: UNSanctionsRepository
-) {
-    suspend fun searchAllSources(query: String): List<SearchResult> {
+) : SearchService {
+
+    override suspend fun searchAllSources(query: String): List<SearchResult> {
         val localResults = localRepository.getPersons()
             .filterByQuery(query)
             .map { SearchResult.LocalPersonResult(it) }
@@ -22,13 +29,13 @@ class SearchService(
         return localResults + unIndividualResults + unEntityResults
     }
 
-    suspend fun searchLocalOnly(query: String): List<SearchResult> {
+    override suspend fun searchLocalOnly(query: String): List<SearchResult> {
         return localRepository.getPersons()
             .filterByQuery(query)
             .map { SearchResult.LocalPersonResult(it) }
     }
 
-    suspend fun searchUNOnly(query: String): List<SearchResult> {
+    override suspend fun searchUNOnly(query: String): List<SearchResult> {
         val individuals = unRepository.getUNSanctions().INDIVIDUALS?.INDIVIDUAL ?: emptyList()
         val entities = unRepository.getUNSanctions().ENTITIES?.ENTITY ?: emptyList()
 

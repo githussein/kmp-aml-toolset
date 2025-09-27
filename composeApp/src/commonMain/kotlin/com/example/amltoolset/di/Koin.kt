@@ -5,6 +5,7 @@ import com.example.aml_kyc_tool.data.LocalJsonPersonRepository
 import com.example.aml_kyc_tool.data.PersonRepository
 import com.example.amltoolset.ui.LoginScreen.LoginViewModel
 import com.example.amltoolset.data.SearchService
+import com.example.amltoolset.data.SearchServiceImpl
 import com.example.amltoolset.data.UNSanctionsRepository
 import com.example.amltoolset.data.UNSanctionsRepositoryImpl
 import com.example.amltoolset.data.UNSanctionsService
@@ -31,7 +32,7 @@ val repositoryModule = module {
 }
 
 val serviceModule = module {
-    single { SearchService(localRepository = get(), unRepository = get()) }
+    single { SearchServiceImpl(localRepository = get(), unRepository = get()) }
 }
 
 val viewmodelModule = module {
