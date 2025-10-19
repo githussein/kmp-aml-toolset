@@ -19,6 +19,7 @@ kotlinxSerializationJson = "1.9.0"
 ktorClientXml = "2.3.7"
 ktorSerializationKotlinxXml = "3.2.3"
 ktorSerializationKotlinxXmlVersion = "2.3.5"
+mockative = "3.0.1"
 navigationCompose = "2.8.0-alpha13"
 serialization = "0.91.2"
 
@@ -45,6 +46,7 @@ ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktorCli
 ktor-client-xml = { module = "io.ktor:ktor-client-xml", version.ref = "ktorClientXml" }
 ktor-serialization-kotlinx-xml = { module = "io.ktor:ktor-serialization-kotlinx-xml", version.ref = "ktorSerializationKotlinxXml" }
 ktor-serialization-kotlinx-xml-v235 = { module = "io.ktor:ktor-serialization-kotlinx-xml", version.ref = "ktorSerializationKotlinxXmlVersion" }
+mockative = { module = "io.mockative:mockative", version.ref = "mockative" }
 navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 serialization = { module = "io.github.pdvrieze.xmlutil:serialization", version.ref = "serialization" }
 

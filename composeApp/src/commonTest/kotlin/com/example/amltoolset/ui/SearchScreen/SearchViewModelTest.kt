@@ -2,29 +2,28 @@ package com.example.amltoolset.ui.SearchScreen
 
 import com.example.aml_kyc_tool.SearchScreen.SearchViewModel
 import com.example.amltoolset.data.SearchService
-import com.example.amltoolset.data.model.SearchResult
 import com.example.amltoolset.util.MainDispatcherRule
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.test.setMain
+import io.mockative.coEvery
+import io.mockative.coVerify
+import kotlinx.coroutines.test.runTest
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
-
-class FakeSearchService : SearchService {
-    override suspend fun searchAllSources(query: String): List<SearchResult> = emptyList()
-    override suspend fun searchLocalOnly(query: String): List<SearchResult> = emptyList()
-    override suspend fun searchUNOnly(query: String): List<SearchResult> = emptyList()
-}
+import io.mockative.mock
+import io.mockative.of
 
 class SearchViewModelTest {
     private val dispatcherRule = MainDispatcherRule()
+
+    val mockSearchService = mock(of<SearchService>())
+
     private lateinit var viewModel: SearchViewModel
 
     @BeforeTest
     fun setup() {
         dispatcherRule.setUp()
-        viewModel = SearchViewModel(FakeSearchService())
+        viewModel = SearchViewModel(mockSearchService)
     }
 
     @AfterTest
@@ -38,6 +37,19 @@ class SearchViewModelTest {
         val newQuery = "Samy" // arrange
         viewModel.onQueryChange(newQuery) // act
         val updatedUiState = viewModel.uiState.value
-        assertEquals(newQuery, updatedUiState.query) //assert
+        assertEquals(newQuery, updatedUiState.query) // assert
+    }
+
+
+    @Test
+    fun `onQueryChange triggers search service`() = runTest {
+        // arrange
+        val query = "test query"
+        coEvery { mockSearchService.searchAllSources(query) }
+            .returns(emptyList())
+        // act
+        viewModel.onQueryChange(query)
+        // assert
+        coVerify { mockSearchService.searchAllSources(query) }.wasInvoked()
     }
 }

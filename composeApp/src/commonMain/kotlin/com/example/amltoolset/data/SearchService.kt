@@ -3,7 +3,9 @@ package com.example.amltoolset.data
 import com.example.aml_kyc_tool.data.PersonRepository
 import com.example.aml_kyc_tool.data.model.PersonDto
 import com.example.amltoolset.data.model.SearchResult
+import io.mockative.Mockable
 
+@Mockable
 interface SearchService {
     suspend fun searchAllSources(query: String): List<SearchResult>
     suspend fun searchLocalOnly(query: String): List<SearchResult>

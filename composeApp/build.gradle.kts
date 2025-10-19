@@ -11,6 +11,7 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeHotReload)
     kotlin("plugin.serialization") version "1.9.10"
+    id("io.mockative") version "3.0.1"
 }
 
 kotlin {
@@ -36,7 +37,7 @@ kotlin {
     
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
-        outputModuleName.set("composeApp")
+        moduleName = "composeApp"
         browser {
             val rootDirPath = project.rootDir.path
             val projectDirPath = project.projectDir.path
@@ -78,6 +79,7 @@ kotlin {
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.serialization.kotlinx.xml)
             implementation(compose.materialIconsExtended)
+            implementation(libs.mockative)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -132,4 +134,13 @@ compose.desktop {
             packageVersion = "1.0.0"
         }
     }
+}
+
+// Disable Configuration Cache for
+tasks.withType<io.mockative.MockativeConfigurationTask>().configureEach {
+    notCompatibleWithConfigurationCache("mockative uses Task.project at execution time")
+}
+
+tasks.withType<io.mockative.MockativeProcessRuntimeTask>().configureEach {
+    notCompatibleWithConfigurationCache("mockative uses Task.project at execution time")
 }
