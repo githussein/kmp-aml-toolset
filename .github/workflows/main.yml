@@ -1,0 +1,11 @@
+on:
+  # runs through API call
+  repository_dispatch:
+    types: [incident_report]
+
+jobs:
+  handle-incident:
+    runs-on: ubunto-latest
+    steps:
+    - name: Print incident details
+      run: echo "Incident reported"
