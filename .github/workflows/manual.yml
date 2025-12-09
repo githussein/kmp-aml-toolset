@@ -1,0 +1,19 @@
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Choose environment"
+        required: true
+        type: choice
+        default: statging
+        options:
+          - statging
+          - production
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Deploy application"
+      - run: echo "Deploy application..."
+        
