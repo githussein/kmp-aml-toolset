@@ -1,4 +1,5 @@
 on:
+# runs through 1. GitHub GUI  2. GitHub CLI tool
   workflow_dispatch:
     inputs:
       environment:
